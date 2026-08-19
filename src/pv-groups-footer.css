@@ -1,0 +1,10 @@
+/* PV Groups footer */
+.pv-groups-footer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #475569;
+}

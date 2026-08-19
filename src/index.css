@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-chrono-bg text-slate-100 font-sans antialiased;
+  overflow-x: hidden;
+}
+
+/* Light mode overrides */
+.light body,
+body:has(.light) {
+  @apply bg-slate-100 text-slate-900;
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/[0.04] backdrop-blur-xl border border-white/10 rounded-2xl;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  }
+
+  .light .glass {
+    @apply bg-white/70 border-slate-300/60;
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    background-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.5) 100%
+    );
+  }
+
+  .glass-strong {
+    @apply bg-white/[0.06] backdrop-blur-2xl border border-white/15 rounded-2xl;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .light .glass-strong {
+    @apply bg-white/80 border-slate-300;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(120deg, #22d3ee, #3b82f6, #8b5cf6);
+  }
+
+  .btn-chrono {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-200 active:scale-95 select-none;
+  }
+
+  .btn-primary {
+    @apply btn-chrono text-white;
+    background-image: linear-gradient(135deg, #06b6d4, #3b82f6);
+    box-shadow: 0 8px 24px rgba(34, 211, 238, 0.35);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 12px 32px rgba(34, 211, 238, 0.5);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    @apply btn-chrono text-cyan-100;
+    background-image: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(59, 130, 246, 0.2));
+    border: 1px solid rgba(139, 92, 246, 0.4);
+  }
+  .btn-secondary:hover {
+    border-color: rgba(139, 92, 246, 0.7);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+  }
+
+  .btn-ghost {
+    @apply btn-chrono text-slate-300 bg-white/[0.03] border border-white/10;
+  }
+  .btn-ghost:hover {
+    @apply bg-white/[0.07] text-white;
+  }
+
+  .light .btn-ghost {
+    @apply text-slate-600 bg-slate-200/60 border-slate-300;
+  }
+  .light .btn-ghost:hover {
+    @apply bg-slate-200 text-slate-900;
+  }
+
+  .light .btn-secondary {
+    color: #6d28d9;
+  }
+}
+
+/* Custom scrollbar */
+.scroll-area::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 238, 0.3);
+  border-radius: 3px;
+}
+.scroll-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 211, 238, 0.5);
+}
+
+/* Ambient background */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ambient-bg::before,
+.ambient-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.4;
+}
+.ambient-bg::before {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #1e3a8a, transparent 70%);
+  top: -200px;
+  left: -150px;
+}
+.ambient-bg::after {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #6d28d9, transparent 70%);
+  bottom: -150px;
+  right: -100px;
+}
+
+.light .ambient-bg::before {
+  opacity: 0.15;
+}
+.light .ambient-bg::after {
+  opacity: 0.12;
+}
+
+/* Grid overlay */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+.light .grid-overlay {
+  background-image: linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+}
